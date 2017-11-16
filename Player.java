@@ -32,8 +32,4 @@ public interface Player extends Runnable {
      */
     public boolean checkDoneCondition();
     
-    /**
-     * Method randomly chooses a white bag
-     */
-    public void chooseBag();
 }
