@@ -5,6 +5,10 @@
  */
 package pebbles;
 
+import java.util.Scanner;  
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.concurrent.CyclicBarrier;
 
@@ -17,20 +21,30 @@ public class Pebbles {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     
-    public static void main(String[] args) {
-        //timer or turn counter that will stop the game after certain amount of time or turns assuming that no one can win
+    public static void main(String[] args) throws IOException {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter number of players:");  
+        int players = sc.nextInt();
+        
         BasePebbleBag[] table;
-        String p = new String("12, 13, 14, 67, 78, 89, 90, 45, 23, 56, 45, 23, 45, 4, 6, 8, 3, 5, 1, 34, 2, 56, 34, 6, 54, 32, 43, 2");
+        
         table = new BasePebbleBag[numBags];
         ArrayList<ArrayList<Integer>> pebbleWeightsArray;
         pebbleWeightsArray = new ArrayList<ArrayList<Integer>>(numBags);
         for (int x = 0; x < numBags; x++){
              try{
-                //if x < 3
-                pebbleWeightsArray.add(x, parseInput(p)); // pebble lists 0,1,2
-                //if x > 2 
+                if(x < 3){
+                System.out.println("Enter file location of bag "+x+" to load:"); 
+                String txt = new String(Files.readAllBytes(Paths.get(sc.next())));
+                pebbleWeightsArray.add(x, parseInput(txt)); // pebble lists 0,1,2
+                System.out.println(pebbleWeightsArray);
+                }
+                else{
+                    
+                }
                 //give empty array list 
             } catch (NumberFormatException e) {
                 System.out.println("File presented was in an invalid format. Please provide file in a valid format (integers separated by commas)");
@@ -39,6 +53,8 @@ public class Pebbles {
             table[x] = new BasePebbleBag(pebbleWeightsArray.get(x));
         }
         
+        //timer or turn counter that will stop the game after certain amount of time or turns assuming that no one can win
+        String txt = new String(Files.readAllBytes(Paths.get(sc.next)));
         int numPlayers = 3;
         BasePlayer[] players;
         CyclicBarrier barrier = new CyclicBarrier(numPlayers);

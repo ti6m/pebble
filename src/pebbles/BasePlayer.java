@@ -1,5 +1,6 @@
 package pebbles;
 
+import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -73,6 +74,12 @@ public class BasePlayer implements Player {
             //check if 100
             //discard pebble
             //if 100 -> win and inturupt other threads.
+            int chosenBag;
+            chosenBag = chooseBag();
+            hand.put(table[chosenBag].remove());
+            if(!checkDoneCondition()){
+                table[chosenBag + 3].put(hand.remove());
+            }
         }  catch (InterruptedException | BrokenBarrierException e) {
             return;
         }
@@ -80,5 +87,10 @@ public class BasePlayer implements Player {
         //gets done if interrupted, eg gracefully shut down game
          checkDoneCondition();
     }
-    
+    @Override
+    public int chooseBag() {
+        Random rand = new Random();
+        int  n = rand.nextInt(2) + 1;
+        return n;
+    }
 }

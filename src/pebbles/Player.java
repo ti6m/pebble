@@ -35,5 +35,5 @@ public interface Player extends Runnable {
     /**
      * Method randomly chooses a white bag
      */
-    public void chooseBag();
+    public int chooseBag();
 }
