@@ -65,6 +65,7 @@ public class BasePlayerHand implements PebbleBag {
         for (int i=0; i < PebbleBag.size(); i++) { 
             total += (int)(PebbleBag.get(i)); 
         }      
+        System.out.println(total);
         return total == 100;
     }
 

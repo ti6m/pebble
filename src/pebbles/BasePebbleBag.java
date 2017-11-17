@@ -20,13 +20,12 @@ public class BasePebbleBag implements PebbleBag {
         PebbleBag = weights;
     }
     
-    /**
+/**
      * {@inheritDoc}
      */
     public synchronized String toStr() {
         return PebbleBag.toString();
     }    
-    
     /**
      * {@inheritDoc}
      */

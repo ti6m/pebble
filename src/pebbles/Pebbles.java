@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  *
@@ -20,10 +21,14 @@ import java.util.concurrent.CyclicBarrier;
 public class Pebbles {
     static int numBags = 6;
 
+    
+    
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
      */
+    
+    
     
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in); //makes new scanner to read command lin input
@@ -72,8 +77,12 @@ public class Pebbles {
         for (int x = 0; x < numPlayers; x++){
             players[x] = new BasePlayer(x, table, barrier);
         }
+        int turnCounter = 0;
         
-        players[0].run();
+        while(turnCounter < 500) {
+            players[0].run();
+            turnCounter ++;
+        }
     }
     
     public static ArrayList<Integer> parseInput(String input) throws NumberFormatException{

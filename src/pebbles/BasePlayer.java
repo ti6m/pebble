@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * An implementation of Player that can play the game described in the 
  * specification. 
  * 
- * @author wwcy201
+ * @author tmlb201
  * @author lb552
  */
 public class BasePlayer implements Player {
@@ -38,7 +38,8 @@ public class BasePlayer implements Player {
         this.table = table;
         this.startingGate = startingGate;
     }
-    
+
+
     /**
      * {@inheritDoc}
      */
@@ -98,7 +99,7 @@ public class BasePlayer implements Player {
     @Override
     public int chooseBag() {
         Random rand = new Random();
-        int  n = rand.nextInt(2) + 1;
+        int  n = rand.nextInt(3);
         return n;
     }
 }
