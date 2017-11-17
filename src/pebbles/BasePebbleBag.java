@@ -23,6 +23,13 @@ public class BasePebbleBag implements PebbleBag {
     /**
      * {@inheritDoc}
      */
+    public synchronized String toStr() {
+        return PebbleBag.toString();
+    }    
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public synchronized int size() {
         return PebbleBag.size();

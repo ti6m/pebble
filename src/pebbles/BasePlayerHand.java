@@ -26,6 +26,13 @@ public class BasePlayerHand implements PebbleBag {
     public synchronized int size() {
         return PebbleBag.size();
     }
+
+/**
+     * {@inheritDoc}
+     */
+    public synchronized String toStr() {
+        return PebbleBag.toString();
+    }    
     
     /**
      * {@inheritDoc}

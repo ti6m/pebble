@@ -76,7 +76,15 @@ public class BasePlayer implements Player {
             //if 100 -> win and inturupt other threads.
             int chosenBag;
             chosenBag = chooseBag();
+            while(hand.size() < 10) {
+                hand.put(table[chosenBag].remove());
+                System.out.println("hand: "+hand.toStr());
+                System.out.println("chosenBag: "+table[chosenBag].toStr());
+            }
+/*
+            chosenBag = chooseBag();
             hand.put(table[chosenBag].remove());
+**/
             if(!checkDoneCondition()){
                 table[chosenBag + 3].put(hand.remove());
             }
@@ -94,3 +102,4 @@ public class BasePlayer implements Player {
         return n;
     }
 }
+

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.CyclicBarrier;
 
 /**
@@ -32,31 +33,38 @@ public class Pebbles {
         BasePebbleBag[] table; //initialises the BasePebbleBags that will be on the table
         table = new BasePebbleBag[numBags];
         
+        
         ArrayList<ArrayList<Integer>> pebbleWeightsArray; 
-        pebbleWeightsArray = new ArrayList<ArrayList<Integer>>(numBags);//initialises the array of arrays of integers that will be the individual pebble weights
+        pebbleWeightsArray = new ArrayList<>(numBags);//initialises the array of arrays of integers that will be the individual pebble weights
         
         for (int x = 0; x < numBags; x++){
              try{
                 if(x < 3){
-                System.out.println("Enter file location of bag "+ x +" to load:"); 
-                String txt = new String(Files.readAllBytes(Paths.get(sc.next()))); //get the next thing on the command line, read it and make it into a string
-                pebbleWeightsArray.add(x, parseInput(txt)); // change the string into integers and add to the pebbleWeightsArray
-                System.out.println("pebbleWeightsArray" + pebbleWeightsArray); // testing line
+                    System.out.println("Enter file location of bag "+ x +" to load:"); 
+                    String txt = new String(Files.readAllBytes(Paths.get(sc.next()))); //get the next thing on the command line, read it and make it into a string
+                    pebbleWeightsArray.add(x, parseInput(txt)); // change the string into integers and add to the pebbleWeightsArray
+                    table[x] = new BasePebbleBag(pebbleWeightsArray.get(x));
+                    System.out.println("pebbleWeightsArray" + pebbleWeightsArray); // testing line
                 }
-                else{
-                    continue; // rest of bags on table have no contents as they are the discard bags
+                else {
+                    table[x] = new BasePebbleBag(new ArrayList<Integer>());
+                }
+                // rest of bags on table have no contents as they are the discard bags
                 //System.out.println("pebbleWeightsArray" + pebbleWeightsArray);
                     
-                }
+                
                 //give empty array list 
             } catch (NumberFormatException e) {
                 System.out.println("File presented was in an invalid format. Please provide file in a valid format (integers separated by commas)");
                 System.exit(1);
             }
-            table[x] = new BasePebbleBag(pebbleWeightsArray.get(x));
-            
+
         }
-        
+/* Test table contents
+        for (int x = 0; x < numBags; x++){
+            System.out.println("Table contents: "+table[x].toStr());
+        }
+**/
         //timer or turn counter that will stop the game after certain amount of time or turns assuming that no one can win
         BasePlayer[] players;
         CyclicBarrier barrier = new CyclicBarrier(numPlayers);
@@ -66,9 +74,6 @@ public class Pebbles {
         }
         
         players[0].run();
-        //create a player instance for each player
-        //set game running
-        return;
     }
     
     public static ArrayList<Integer> parseInput(String input) throws NumberFormatException{
