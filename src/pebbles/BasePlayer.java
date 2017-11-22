@@ -23,13 +23,11 @@ public class BasePlayer implements Player {
     /**
      * Method initializes a BasePlayer.
      * <p>
-     * A BasePlayer needs two card decks, a flag for when to end, and a starting
+     * A BasePlayer needs a hand, access to the PebbleBags on the table and a starting
      * condition to allow a fair start.
      * 
      * @param id the unique identifier of a player
-     * @param input a reference to the deck to take cards from
-     * @param output a reference to the deck to discard cards into
-     * @param isDone a flag to alert all players when a win has been reached
+     * @param table the list of PebbleBags that represent those on the table
      * @param startingGate a gate to allow all players to start at once
      */
     public BasePlayer(int id, BasePebbleBag[] table, CyclicBarrier startingGate) {
@@ -38,8 +36,7 @@ public class BasePlayer implements Player {
         this.table = table;
         this.startingGate = startingGate;
     }
-
-
+    
     /**
      * {@inheritDoc}
      */
@@ -55,7 +52,7 @@ public class BasePlayer implements Player {
     @Override
     public boolean checkDoneCondition() {
         if(hand.totals100()) {
-                //launch inturupt. google it
+                //launch inturupt
                 System.out.println("Player "+id+" wins");
                 return true;
         }
@@ -82,10 +79,6 @@ public class BasePlayer implements Player {
                 System.out.println("hand: "+hand.toStr());
                 System.out.println("chosenBag: "+table[chosenBag].toStr());
             }
-/*
-            chosenBag = chooseBag();
-            hand.put(table[chosenBag].remove());
-**/
             if(!checkDoneCondition()){
                 table[chosenBag + 3].put(hand.remove());
             }
@@ -99,7 +92,7 @@ public class BasePlayer implements Player {
     @Override
     public int chooseBag() {
         Random rand = new Random();
-        int  n = rand.nextInt(3);
+        int  n = rand.nextInt(2) + 1;
         return n;
     }
 }

@@ -5,8 +5,8 @@ package pebbles;
  * accept pebbles and understand what constitutes a
  * done condition, in reference to the game being played.
  * 
- * @author Tim
- * @author Laura
+ * @author tmlb201
+ * @author lb552
  */
 
 public interface Player extends Runnable {
@@ -34,6 +34,7 @@ public interface Player extends Runnable {
     
     /**
      * Method randomly chooses a white bag
+     * @return the index of the chosen bag
      */
     public int chooseBag();
 }

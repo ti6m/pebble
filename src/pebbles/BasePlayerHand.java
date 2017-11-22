@@ -1,19 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pebbles;
 
 import java.util.ArrayList;
 
-/** 
- *
- * @author laura
+/**
+ * An implementation of PebbleBag specific to the player's hand.
+ * 
+ * @author tmlb201
+ * @author lb552
  */
 public class BasePlayerHand implements PebbleBag {
+    
     final private ArrayList<Integer> PebbleBag;
     
+    /**
+     * Method initializes an empty BasePlayerHand
+     */
     
     public BasePlayerHand() {
         PebbleBag = new ArrayList();    
@@ -27,9 +28,11 @@ public class BasePlayerHand implements PebbleBag {
         return PebbleBag.size();
     }
 
+    
 /**
      * {@inheritDoc}
      */
+    @Override
     public synchronized String toStr() {
         return PebbleBag.toString();
     }    
@@ -37,8 +40,6 @@ public class BasePlayerHand implements PebbleBag {
     /**
      * {@inheritDoc}
      */
-    
-    
     @Override
     public synchronized void put(Integer i) {
         PebbleBag.add(i);
@@ -52,7 +53,7 @@ public class BasePlayerHand implements PebbleBag {
         if(PebbleBag.isEmpty()){  
             //need to add from white bag to refil not throw exception??
             //return zero to indicate that bag is empty so we can do above
-            throw new IllegalStateException("Can't dequeue an empty deck");         
+            throw new IllegalStateException("Can't remove an item from an empty array");         
         }       
         int rando = (int)((Math.random()*PebbleBag.size()));
         Integer i = PebbleBag.remove(rando);         
@@ -60,12 +61,19 @@ public class BasePlayerHand implements PebbleBag {
         return i;
     }
 
+    
+    /**
+     * Method returns a if the bag's pebbles total 100.
+     * <p>
+     * This method returns a if the bag's pebbles total 100.
+     * 
+     * @return boolean
+     */
     public boolean totals100() {
         int total = 0;
         for (int i=0; i < PebbleBag.size(); i++) { 
             total += (int)(PebbleBag.get(i)); 
         }      
-        System.out.println(total);
         return total == 100;
     }
 

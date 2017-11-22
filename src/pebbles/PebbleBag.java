@@ -2,10 +2,10 @@ package pebbles;
 
 /**
  * The no-argument constructor of a class implementing this 
- * interface should initialize the PebbleBag with no cards.
+ * interface should initialize the PebbleBag with no pebbles.
  * 
- * @author Tim
- * @author Laura
+ * @author tmlb201
+ * @author lb552
  */
 
 public interface PebbleBag {
@@ -27,6 +27,7 @@ public interface PebbleBag {
      * 
      * @param i
      */
+    
     public void put(Integer i);
 
     /**
@@ -37,4 +38,15 @@ public interface PebbleBag {
      * @return the pebble removed from the PebbleBag
      */
     public Integer remove();
+    
+        
+    /**
+     * Method returns the string value of pebbles held within.
+     * <p>
+     * PebbleBag contains Pebble objects, and this 
+     * reflects the string value of the pebbles held.
+     * 
+     * @return the quantity of Pebble instances held within
+     */
+    public String toStr();
 }
